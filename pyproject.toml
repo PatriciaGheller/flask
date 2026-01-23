@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "desenvolvimento-de-apis-flask"
+version = "0.1.0"
+description = "API Flask de exemplo"
+authors = ["Patrícia Gheller <patricia.gheller.1985@gmail.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+flask = "^3.1.2"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
