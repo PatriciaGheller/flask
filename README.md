@@ -1,150 +1,155 @@
-# 📘 DIO Blog API 🏦
-https://img.shields.io/badge/Python-3.12-blue?logo=python  
-https://img.shields.io/badge/Flask-2.3-lightgrey?logo=flask  
-https://img.shields.io/badge/SQLAlchemy-2.0-red?logo=sqlite  
-https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow
+# Dio Bank API (Flask)
 
-Uma aplicação desenvolvida em Flask para estudo de criação de APIs REST, com foco em usuários e posts.
-O projeto foi construído durante práticas de desenvolvimento de APIs com Python e Flask.
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-2.3-lightgrey?logo=flask)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-red?logo=sqlite)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
 
-# 🚀 Funcionalidades
+## 📌 Sobre o projeto
+Aplicação backend desenvolvida em Flask para estudo de APIs REST, incluindo conexão com banco de dados SQLite.
+Aplicação backend desenvolvida em Flask para estudo de APIs REST, incluindo conexão com banco de dados SQLite e gerenciamento de migrações de banco de dados.
 
-### - CRUD de Usuários
+## 🔗 Links
 
- - Criar, listar, buscar, atualizar e deletar usuários
+- Repositório: [https://github.com/PatriciaGheller/Flask](https://github.com/PatriciaGheller/Flask)
+- Documentação oficial do Flask: [https://flask.palletsprojects.com](https://flask.palletsprojects.com)
 
-### - CRUD de Posts
+## 🚀 Tecnologias utilizadas
 
-- Criar, listar, buscar, atualizar e deletar posts
+- Python 3.x
+- Flask
+- Poetry
+- SQLite
+- Poetry
 
-### - Relação entre Usuários ↔ Posts
+## 🛠️ Ferramentas e bibliotecas
 
-- Cada post pertence a um usuário
+- Insomnia
+- Flask‑Migrate (integração com Alembic para migrações de banco de dados)
+- Pytest (framework de testes automatizados)
 
-- Cada usuário pode ter vários posts
+## 📂 Estrutura do projeto
 
-### - Respostas enriquecidas:
-
-- Posts retornam o author_username
-
-- Usuários retornam seus posts
-
-# 🛠️ Tecnologias utilizadas
-
-- [Python 3.12](https://www.python.org/)
-
-- [Flask](https://flask.palletsprojects.com/)
-
-- [SQLAlchemy](https://www.sqlalchemy.org/)
-
-- [SQLite](https://www.sqlite.org/)
-
-- [Insomnia](https://insomnia.rest/)
-
-# 📂 Estrutura do projeto
-
-dio_bank/
+Desenvolvimento-de-APIs-flask/
 │
-├── src/
-│   ├── app.py              # Configuração principal da aplicação Flask
-│   ├── models.py           # Definição das classes User e Post
-│   └── controllers/
-│       ├── user.py         # Rotas e lógica de usuários
-│       └── post.py         # Rotas e lógica de posts
+├── dio_bank/
+│   ├── src/
+│   │   ├── app.py          # Arquivo principal da aplicação Flask
+│   │   ├── models.py       # Definição das tabelas/entidades
+│   │   ├── utils.py        # Funções auxiliares
+│   │   └── tests/          # Testes automatizados com pytest
+│   │       └── test_utils.py
+│   ├── migrations/         # Scripts de migração gerados pelo Flask-Migrate
+│   └── init.py
 │
-└── README.md               # Documentação do projeto
+├── README.md
+├── pyproject.toml
+├── poetry.lock
+└── schema.sql
 
-# 🔗 Endpoints
-
-## 👤 Usuários
-
-- POST /users → cria usuário
-
-- GET /users → lista todos os usuários (com posts)
-
-- GET /users/<id> → busca usuário específico (com posts)
-
-- PATCH /users/<id> → atualiza usuário
-
-- DELETE /users/<id> → remove usuário
-
-# 📝 Posts
-
-- POST /posts → cria post vinculado a um usuário
-
-- GET /posts → lista todos os posts (com nome do autor)
-
-- GET /posts/<id> → busca post específico
-
-- PATCH /posts/<id> → atualiza post
-
-- DELETE /posts/<id> → remove post
-
-# 📖 Exemplos de uso
-
-### Criar usuário
-
-POST /users
-{
-  "username": "Breno"
-}
-
-### Criar post
-
-POST /posts
-{
-  "title": "Meu primeiro post",
-  "body": "Estou aprendendo Flask!",
-  "author_id": 2
-}
-
-### Listar usuários
-
-GET /users
-{
-  "users": [
-    {
-      "id": 2,
-      "username": "Breno",
-      "posts": [
-        {
-          "id": 2,
-          "title": "Meu primeiro post",
-          "body": "Estou aprendendo Flask!",
-          "created": "2026-01-27T21:31:53"
-        }
-      ]
-    }
-  ]
-}
-
-# 📌 Como rodar o projeto
+## ⚙️ Configuração do ambiente
 
 1. Clone este repositório:
 
-git clone https://github.com/seu-usuario/dio-bank-api.git
-cd dio-bank-api
+   ```bash
+   git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+   git clone https://github.com/PatriciaGheller/flask.git
 
-2. Crie o ambiente virtual com Poetry:
-
+2. Instale as dependências com Poetry:
 poetry install
 
-3. Execute a aplicação:
+🗄️ Banco de dados
+## 🗄️ Banco de dados
 
-flask run
+O banco é inicializado com o comando:
 
-4. Teste os endpoints com Insomnia ou cURL.
+poetry run flask --app dio_bank.src.app init-db
 
-# 🎯 Próximos passos
+Crie e aplique migrações:
 
-- Adicionar comentários nos posts
+poetry run flask --app dio_bank.src.app db migrate -m "Mensagem da migração"
+poetry run flask --app dio_bank.src.app db upgrade
 
-- Implementar autenticação (JWT)
+O schema inicial está definido em schema.sql.
+▶️ Executando a aplicação
 
-- Criar documentação automática com Swagger/OpenAPI
+## ▶️ Executando a aplicação
 
-- Implementar paginação em listagens
+Para rodar o servidor em modo debug:
 
-# 👩‍💻 Autora
+poetry run flask --app dio_bank.src.app run --debug
 
-Projeto desenvolvido por Patrícia Gheller como parte dos estudos de desenvolvimento de APIs com Flask.
+A aplicação estará disponível em:
+http://127.0.0.1:5000
+<http://127.0.0.1:5000>
+
+## 📡 Endpoints principais
+
+### Usuários
+
+- GET /users → Lista todos os usuários
+
+- POST /users → Cria um novo usuário
+
+- GET /users/<id> → Detalhes de um usuário específico
+
+- PUT /users/<id> → Atualiza dados de um usuário
+
+- DELETE /users/<id> → Remove um usuário
+
+### Posts
+
+- GET /posts → Lista todos os posts
+
+- POST /posts → Cria um novo post
+
+- GET /posts/<id> → Detalhes de um post específico
+
+- PUT /posts/<id> → Atualiza um post
+
+- DELETE /posts/<id> → Remove um post
+
+## 🧪 Testes
+
+Os testes são escritos com pytest e ficam na pasta dio_bank/src/tests.
+
+Para rodar todos os testes:
+
+poetry run pytest
+
+## 💻 Exemplo de uso
+
+Criando um usuário via curl:
+
+curl -X POST <http://127.0.0.1:5000/users> \
+     -H "Content-Type: application/json" \
+     -d '{"name": "Patricia", "email": "<patricia@example.com>"}'
+
+Resposta esperada:
+
+{
+  "id": 1,
+  "name": "Patricia",
+  "email": "<patricia@example.com>"
+}
+
+## 📈 Próximos passos
+
+- Implementar autenticação JWT ✅
+
+- Criar documentação Swagger/OpenAPI
+
+- Adicionar testes de integração
+
+- Configurar CI/CD com GitHub Actions
+
+## 👩‍💻 Autora
+
+Projeto desenvolvido por Patrícia Gheller  
+GitHub: <https://github.com/PatriciaGheller> (github.com in Bing)  
+LinkedIn: <https://www.linkedin.com/in/patriciagheller> (linkedin.com in Bing)
+
+## 📜 Licença
+
+📜 Licença
+Este projeto é apenas para fins de estudo e aprendizado.
